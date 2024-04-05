@@ -39,7 +39,7 @@ jobs:
 
       - name: Run Docker container and test
         run: |
-          OUTPUT = $(docker run santhoshboddana/mlops:cid_cd_a3)
+          OUTPUT=$(docker run santhoshboddana/mlops:cid_cd_a3)
           echo "Score:"
           echo "$OUTPUT"
           if [[ `echo "$OUTPUT 0.35" | awk '{print ($1 < $2)}'` == 1 ]]; then echo "Insufficient Accuracy" && exit 1; fi
