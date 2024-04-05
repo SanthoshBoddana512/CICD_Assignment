@@ -27,7 +27,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: santhoshboddana/mlops:cid_cd_a3
+          tags: santhoshboddana/mlops:ci_cd_a3
 
   job2:
     needs: job1
@@ -35,11 +35,11 @@ jobs:
     if: ${{ needs.job1.result == 'success' }}
     steps:
       - name: Pull Docker image
-        run: docker pull santhoshboddana/mlops:cid_cd_a3
+        run: docker pull santhoshboddana/mlops:ci_cd_a3
 
       - name: Run Docker container and test
         run: |
-          OUTPUT=$(docker run santhoshboddana/mlops:cid_cd_a3)
+          OUTPUT=$(docker run santhoshboddana/mlops:ci_cd_a3)
           echo "Score:"
           echo "$OUTPUT"
           if [[ `echo "$OUTPUT 0.35" | awk '{print ($1 < $2)}'` == 1 ]]; then echo "Insufficient Accuracy" && exit 1; fi
