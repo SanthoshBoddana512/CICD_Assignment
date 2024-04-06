@@ -44,12 +44,3 @@ jobs:
           echo "$OUTPUT"
           if [[ `echo "$OUTPUT 0.35" | awk '{print ($1 < $2)}'` == 1 ]]; then echo "Insufficient Accuracy" && exit 1; fi
           echo "successfull executed!"
-
-  job3:
-    needs: job1
-    runs-on: ubuntu-latest
-    if: ${{ needs.job1.result != 'success' }}
-    
-    steps:
-    - name: Notify about job1 failure
-      run: echo "Job1 failed. Handle failure here."
