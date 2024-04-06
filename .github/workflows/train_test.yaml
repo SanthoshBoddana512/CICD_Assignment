@@ -5,7 +5,7 @@ on:
     branches: ['main_dev_branch']
 
 jobs:
-  job1:
+  Train:
     runs-on: ubuntu-latest
     
     steps:
@@ -29,10 +29,10 @@ jobs:
           push: true
           tags: santhoshboddana/mlops:ci_cd_a3
 
-  job2:
-    needs: job1
+  Test:
+    needs: Train
     runs-on: ubuntu-latest
-    if: ${{ needs.job1.result == 'success' }}
+    if: ${{ needs.Train.result == 'success' }}
     steps:
       - name: Pull Docker image
         run: docker pull santhoshboddana/mlops:ci_cd_a3
